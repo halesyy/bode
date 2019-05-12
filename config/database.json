@@ -1,0 +1,11 @@
+{
+  "params": {
+    "host": "localhost",
+    "username": "root",
+    "password": "",
+    "database": "bode",
+    "logging": false,
+    "sync": false,
+    "dbport": 3306
+  }
+}
