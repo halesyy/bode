@@ -1,6 +1,7 @@
 const db = require("./utils/database");
 global.express = require("express");
 global.app = express();
+global.cl = console.log, global.c = console.log;
 const port = 80;
 
 const session = require('express-session');
@@ -42,5 +43,8 @@ app.use(session({
  * All of the application's routes
  */
 require("./router/router");
+
+users = "SELECT * FROM users".get();
+cl(users);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

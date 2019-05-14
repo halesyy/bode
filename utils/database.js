@@ -16,7 +16,7 @@ global.GlobalDB = db
  * Requires "global.GlobalDB" to run effectively.
  */
 const Interact = {
-  gt: function(query, bind) {
+  gt: async function(query, bind = false) {
     const q = query;
     const b = bind;
     return new Promise((resolve, reject) => {
@@ -37,6 +37,20 @@ global.gt = Interact.gt;
 // global.Model = Sequelize.Model
 require("./models");
 GlobalDB.sync({ force: params.sync });
+
+// Shorthand string prototype's for DB
+String.prototype.get = async function(callback = false) {
+  const rows = await gt(this); // this = "SELECT * FROM users"
+  return rows;
+}
+String.prototype.bound = async function(binds, callback = false) {
+
+  var query = this;
+  var rows = await gt(query, binds);
+  // return await gt(query, );
+  if (callback !== false) callback(rows);
+  return rows;
+}
 
 /*
  * Push
