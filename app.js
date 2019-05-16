@@ -39,15 +39,6 @@ app.use(session({
   saveUninitialized: false
 }));
 
-(async function(){
-  cl("Calling...");
-  "SELECT * FROM florida_companies WHERE corporation_number = :id".bound({
-    id: 'L09000059920'
-  }, (rows) => {
-    cl(rows);
-  });
-})();
-
 /*
  * All of the application's routes
  */

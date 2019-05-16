@@ -3,8 +3,8 @@
     "host": "localhost",
     "username": "root",
     "password": "",
-    "database": "companysearch",
-    "logging": false,
+    "database": "visualize",
+    "logging": true,
     "sync": false,
     "dbport": 3306
   }
