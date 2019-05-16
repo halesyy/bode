@@ -39,12 +39,18 @@ app.use(session({
   saveUninitialized: false
 }));
 
+(async function(){
+  cl("Calling...");
+  "SELECT * FROM florida_companies WHERE corporation_number = :id".bound({
+    id: 'L09000059920'
+  }, (rows) => {
+    cl(rows);
+  });
+})();
+
 /*
  * All of the application's routes
  */
 require("./router/router");
-
-users = "SELECT * FROM users".get();
-cl(users);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

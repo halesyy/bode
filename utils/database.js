@@ -41,6 +41,7 @@ GlobalDB.sync({ force: params.sync });
 // Shorthand string prototype's for DB
 String.prototype.get = async function(callback = false) {
   const rows = await gt(this); // this = "SELECT * FROM users"
+  if (callback !== false) callback(rows);
   return rows;
 }
 String.prototype.bound = async function(binds, callback = false) {
