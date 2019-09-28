@@ -9,11 +9,11 @@ const cookieParser = require('cookie-parser');
 
 global.usingDatabase = true;
 global.uuid = require("uuid/v4");
-if (usingDatabase) {
-   const db = require("./utils/database");
-   const dbconfig = require("./config/database");
-   const params = dbconfig.params;
-}
+const db = require("./utils/database");
+const dbconfig = require("./config/database");
+const params = dbconfig.params;
+// if (usingDatabase) {
+// }
 
 
 /*
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  * Setting up the session
  */
 
-if (usingDatabase) {
+// if (usingDatabase) {
   const sessionStore = new mysqlSession({
     host: params.host,
     port: params.dbport,
@@ -49,7 +49,7 @@ if (usingDatabase) {
     resave: false,
     saveUninitialized: false
   }));
-}
+// }
 
 /*
  * All of the application's routes
