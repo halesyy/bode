@@ -1,11 +1,32 @@
 app.get("/", (req, res) => {
-  if (req.session.uid) res.send(req.session.uid)
-  else {
-    req.session.uid = uuid();
-    res.send("Just set your UUID to "+req.session.uuid);
+  if (!usingDatabase) {
+    res.send("Cool!");
+    return false;
   }
+
+
+  if (!req.session.uuid) {
+    req.session.uuid = global.uuid();
+    var set = true;
+  } else var set = false;
+  var uuid = req.session.uuid;
+  res.render("../public/index", {
+    uuid: uuid,
+    justSet: set
+  });
 })
 
 app.get("/login", (req, res) => {
-  res.send(`Your id is ${req.session.uid}`);
+  res.render("../public/login");
+});
+
+app.post("/login", (req, res) => {
+  res.send(`${req.body.username}`);
+
+
+});
+
+app.get("/logout", (req, res) => {
+  req.session.uuid = null;
+  res.send("Done");
 })

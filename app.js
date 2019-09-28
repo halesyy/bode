@@ -1,4 +1,3 @@
-const db = require("./utils/database");
 global.express = require("express");
 global.app = express();
 global.cl = console.log, global.c = console.log;
@@ -8,9 +7,13 @@ const session = require('express-session');
 const mysqlSession = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 
-const dbconfig = require("./config/database");
-const params = dbconfig.params;
+global.usingDatabase = false;
 global.uuid = require("uuid/v4");
+if (usingDatabase) {
+   const db = require("./utils/database");
+   const dbconfig = require("./config/database");
+   const params = dbconfig.params;
+}
 
 
 /*
@@ -18,26 +21,35 @@ global.uuid = require("uuid/v4");
  */
 
 app.use(cookieParser());
+app.set('view engine', 'ejs');
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 /*
  * Setting up the session
  */
 
-const sessionStore = new mysqlSession({
-  host: params.host,
-  port: params.dbport,
-  user: params.username,
-  password: params.password,
-  database: params.database
-});
+if (usingDatabase) {
+  const sessionStore = new mysqlSession({
+    host: params.host,
+    port: params.dbport,
+    user: params.username,
+    password: params.password,
+    database: params.database
+  });
 
-app.use(session({
-  key: 'session_cookie_name',
-  secret: 'session_cookie_secret',
-  store: sessionStore,
-  resave: false,
-  saveUninitialized: false
-}));
+  app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false
+  }));
+}
 
 /*
  * All of the application's routes

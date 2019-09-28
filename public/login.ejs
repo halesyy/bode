@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login!</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <br /> <br/>
+    <form id="formLogin">
+      <input type="text" class="username" required="required" placeholder="username" />
+      <input type="password" class="password" required="required" placeholder="password" />
+      <input type="submit" value="login" />
+    </form>
+    <script>
+      $('#formLogin').submit((event) => {
+        event.preventDefault();
+        var username = $('.username').val(), password = $('.password').val();
+        $.post("/login", {
+          username: username,
+          password: password
+        }, (data) => {
+          alert(data);
+        });
+        return false;
+      });
+    </script>
+  </body>
+</html>

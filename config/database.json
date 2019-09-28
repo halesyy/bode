@@ -3,7 +3,7 @@
     "host": "localhost",
     "username": "root",
     "password": "",
-    "database": "visualize",
+    "database": "bode",
     "logging": true,
     "sync": false,
     "dbport": 3306
