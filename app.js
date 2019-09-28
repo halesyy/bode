@@ -1,13 +1,13 @@
 global.express = require("express");
 global.app = express();
 global.cl = console.log, global.c = console.log;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 const session = require('express-session');
 const mysqlSession = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 
-global.usingDatabase = false;
+global.usingDatabase = true;
 global.uuid = require("uuid/v4");
 if (usingDatabase) {
    const db = require("./utils/database");

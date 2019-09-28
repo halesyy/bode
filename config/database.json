@@ -1,9 +1,9 @@
 {
   "params": {
-    "host": "localhost",
-    "username": "root",
-    "password": "",
-    "database": "bode",
+    "host": "eu-cdbr-west-02.cleardb.net",
+    "username": "bf1fa04c34ab3b",
+    "password": "daceb4c7",
+    "database": "heroku_2a77b9bf5ed361d",
     "logging": true,
     "sync": false,
     "dbport": 3306
