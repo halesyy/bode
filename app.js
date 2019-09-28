@@ -1,7 +1,7 @@
 global.express = require("express");
 global.app = express();
 global.cl = console.log, global.c = console.log;
-const port = 80;
+const port = process.env.PORT || 3000;
 
 const session = require('express-session');
 const mysqlSession = require('express-mysql-session')(session);
