@@ -35,10 +35,13 @@ app.get("/login", async (req, res) => {
       uuid: req.session.uuid
     });
     var user = rows[0];
+    res.render("../public/login", {
+      welcomeTo: user
+    });
   }
-  res.render("../public/login", {
-    welcomeTo: user
-  });
+  else {
+    res.send("oops you arent logged in wait what");
+  }
 });
 
 app.post("/login", async (req, res) => {

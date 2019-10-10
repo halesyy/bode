@@ -3,6 +3,7 @@ global.app = express();
 global.cl = console.log, global.c = console.log;
 const port = process.env.PORT || 80;
 
+const cors = require('cors');
 const session = require('express-session');
 const mysqlSession = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
@@ -24,8 +25,8 @@ if (settings.use_database) {
   });
 
   app.use(session({
-    key: 'session_cookie_name',
-    secret: 'session_cookie_secret',
+    key: 'bcookie1',
+    secret: 'a929akgospa02kalgj,zs',
     store: sessionStore,
     resave: false,
     saveUninitialized: false
@@ -38,6 +39,7 @@ if (settings.use_database) {
  */
 
 app.use(cookieParser());
+app.use(cors());
 app.set('view engine', 'ejs');
 
 var bodyParser = require('body-parser')
