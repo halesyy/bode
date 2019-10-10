@@ -12,24 +12,33 @@ app.get("/", async (req, res) => {
   //   var set = true;
   // } else var set = false;
   // var uuid = req.session.uuid;
-
+  const uuid = global.uuid();
+  req.session.uuid = uuid;
   bcrypt.hash("oops", 10, (err, hash) => {
     let insert = {
+        uuid: uuid,
         username: "jack",
         password: hash,
         firstName: "Jack",
         lastName: "Hales"
       }.into("users");
   });
-
   res.render("../public/index", {
     uuid: "asd",
     justSet: true
   });
 })
 
-app.get("/login", (req, res) => {
-  res.render("../public/login");
+app.get("/login", async (req, res) => {
+  if (req.session.uuid) {
+    var rows = await "SELECT username FROM users WHERE uuid = :uuid".bound({
+      uuid: req.session.uuid
+    });
+    var user = rows[0];
+  }
+  res.render("../public/login", {
+    welcomeTo: user
+  });
 });
 
 app.post("/login", async (req, res) => {
