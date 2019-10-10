@@ -13,12 +13,12 @@
     <br /> <br/>
     Welcome, <%=welcomeTo.username%>
 
-
     <form id="formLogin">
       <input type="text" class="username" required="required" placeholder="username" />
       <input type="password" class="password" required="required" placeholder="password" />
       <input type="submit" value="login" />
     </form>
+
     <script>
       $('#formLogin').submit((event) => {
         event.preventDefault();
