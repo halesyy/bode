@@ -13,7 +13,7 @@ app.get("/", async (req, res) => {
   // } else var set = false;
   // var uuid = req.session.uuid;
 
-  bcrypt.hash("Tigers00", 10, (err, hash) => {
+  bcrypt.hash("oops", 10, (err, hash) => {
     let insert = {
         username: "jack",
         password: hash,
