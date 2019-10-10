@@ -1,10 +1,11 @@
+/*
+ * Use req.session to get session information
+ * Make sure session setup using MySQL database
+ * global.uuid() is the random generator for
+ * id's, best to use in generating users.
+ */
+
 app.get("/", (req, res) => {
-  if (!usingDatabase) {
-    res.send("Cool!");
-    return false;
-  }
-
-
   if (!req.session.uuid) {
     req.session.uuid = global.uuid();
     var set = true;

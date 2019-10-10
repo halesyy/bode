@@ -7,4 +7,4 @@ app.use(express.static('../public'));
 /*
  * The main routes for the application, macro, simple.
  */
-require("./routes/mainRoutes");
+require("./routes/directions");

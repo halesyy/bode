@@ -7,13 +7,30 @@ const session = require('express-session');
 const mysqlSession = require('express-mysql-session')(session);
 const cookieParser = require('cookie-parser');
 
-global.usingDatabase = true;
+global.settings = require('./settings.json');
 global.uuid = require("uuid/v4");
-const db = require("./utils/database");
-const dbconfig = require("./config/database");
-const params = dbconfig.params;
-// if (usingDatabase) {
-// }
+
+if (settings.use_database) {
+  const db = require("./utils/database");
+  const dbconfig = require("./config/database");
+  const params = dbconfig.params;
+
+  const sessionStore = new mysqlSession({
+    host: params.host,
+    port: params.dbport,
+    user: params.username,
+    password: params.password,
+    database: params.database
+  });
+
+  app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false
+  }));
+}
 
 
 /*
@@ -34,21 +51,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  */
 
 // if (usingDatabase) {
-  const sessionStore = new mysqlSession({
-    host: params.host,
-    port: params.dbport,
-    user: params.username,
-    password: params.password,
-    database: params.database
-  });
 
-  app.use(session({
-    key: 'session_cookie_name',
-    secret: 'session_cookie_secret',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false
-  }));
 // }
 
 /*
