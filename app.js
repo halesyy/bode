@@ -12,8 +12,8 @@ global.uuid = require("uuid/v4");
 
 if (settings.use_database) {
   const db = require("./utils/database");
-  const dbconfig = require("./config/database");
-  const params = dbconfig.params;
+  // const dbconfig = require("./config/database");
+  const params = settings.database_params;
 
   const sessionStore = new mysqlSession({
     host: params.host,
