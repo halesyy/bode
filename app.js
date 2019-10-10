@@ -15,7 +15,6 @@ if (settings.use_database) {
   const db = require("./utils/database");
   // const dbconfig = require("./config/database");
   const params = settings.database_params;
-
   const sessionStore = new mysqlSession({
     host: params.host,
     port: params.dbport,
@@ -23,7 +22,6 @@ if (settings.use_database) {
     password: params.password,
     database: params.database
   });
-
   app.use(session({
     key: 'bcookie1',
     secret: 'a929akgospa02kalgj,zs',

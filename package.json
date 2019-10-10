@@ -26,6 +26,7 @@
     "express-mysql-session": "^2.1.0",
     "express-session": "^1.16.1",
     "mysql2": "^1.6.5",
+    "pm2": "^3.5.1",
     "sequelize": "^5.8.6",
     "uuid": "^3.3.2"
   }

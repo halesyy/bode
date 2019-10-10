@@ -52,16 +52,16 @@ app.post("/login", async (req, res) => {
     "un": username
   });
   if (rows.length === 0) {
-    res.send("nothing");
+    res.send(JSON.stringify({success:false}));
     return false;
   }
   var user = rows[0];
   await bcrypt.compare(password, user.password, (error, correct) => {
     if (correct) {
-      res.send(`${req.body.username}`);
+      res.send(JSON.stringify({success:true}));
     }
     else {
-      res.send("you gay");
+      res.send(JSON.stringify({success:false}));
     }
   });
 });
